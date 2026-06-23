@@ -29,9 +29,9 @@ Projet personnel fortement inspiré de
                     └──────────────┘   ┌─────────────┐
                           ▲            │ birds.db    │ (SQLite)
               API eBird ──┘            └─────────────┘
-            (filtre région)                  │
+            (filtre sur région Cataluña, Espagne)                  │
                                              ▼
-   API LLM ───▶ scripts/ génère       ┌─────────────┐
+   API LLM ───▶ prompt génère       ┌─────────────┐
   (Gemini)     les illustrations ────▶│  webapp      │──▶ 🖥️ tablette /
                                       │ (PHP / JS)   │     liseuse / écran
                                       └─────────────┘
