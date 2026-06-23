@@ -29,7 +29,7 @@ Projet personnel fortement inspiré de
                     └──────────────┘   ┌─────────────┐
                           ▲            │ birds.db    │ (SQLite)
               API eBird ──┘            └─────────────┘
-            (filtre sur région Cataluña, Espagne)                  │
+            (filtre sur région Espagne)                  │
                                              ▼
    API LLM ───▶ prompt génère       ┌─────────────┐
   (Gemini)     les illustrations ────▶│  webapp      │──▶ 🖥️ tablette /
@@ -64,26 +64,6 @@ La doc est volontairement découpée par étape :
 | 2 | **Raspberry Pi** — flash de l'OS, config, installation de BirdNET-Pi, eBird | [docs/02-raspberry-pi.md](docs/02-raspberry-pi.md) |
 | 3 | **Webapp** — le dashboard PHP/JS, déploiement, personnalisation | [docs/03-webapp.md](docs/03-webapp.md) |
 | 4 | **Illustrations (LLM)** — génération des illustrations d'oiseaux | [docs/04-illustrations-llm.md](docs/04-illustrations-llm.md) |
-
----
-
-## 🚀 Démarrage rapide
-
-```bash
-# 1. Cloner le repo
-git clone https://github.com/n7eonard/little-visitors.git
-cd little-visitors
-
-# 2. Configurer les secrets (clés API eBird & LLM)
-cp .env.example .env
-$EDITOR .env
-
-# 3. Suivre la doc dans l'ordre :
-#    docs/01-materiel.md  →  docs/02-raspberry-pi.md  →  docs/03-webapp.md  →  docs/04-illustrations-llm.md
-```
-
-> ⚠️ **Secrets** : les clés API (eBird, Gemini) vont dans `.env`, **jamais** committé
-> (voir `.gitignore`). Si une clé a fuité, régénère-la depuis le portail concerné.
 
 ---
 
