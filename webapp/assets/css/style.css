@@ -1,0 +1,85 @@
+/* little-visitors — feuille de style du dashboard.
+   Pensée pour un affichage tablette / liseuse / petit écran. */
+
+:root {
+  --bg: #fafaf8;
+  --fg: #1c1c1c;
+  --muted: #6b7280;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.header {
+  padding: 1.5rem 1.5rem 0.5rem;
+  text-align: center;
+}
+.header h1 { margin: 0; font-size: 1.6rem; letter-spacing: -0.02em; }
+.subtitle { margin: 0.25rem 0 0; color: var(--muted); }
+
+main { padding: 1rem 1.5rem 4rem; }
+
+.collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__image {
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  background-color: #f3f4f6;
+}
+.card__image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+
+.card__body { padding: 0.75rem; }
+.card__name { margin: 0; font-size: 1rem; }
+.card__sci { margin: 0.1rem 0 0.5rem; font-style: italic; color: var(--muted); font-size: 0.8rem; }
+.card__meta { margin: 0; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); }
+.card__count { font-weight: 600; color: var(--fg); }
+
+.empty { text-align: center; color: var(--muted); margin-top: 3rem; }
+
+.footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+/* Variante e-ink : contraste élevé, pas d'aplats gris (à activer via une classe sur <body>). */
+body.eink {
+  --bg: #ffffff;
+  --muted: #000000;
+  --border: #000000;
+}
+body.eink .card { border-width: 2px; }

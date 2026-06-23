@@ -1,0 +1,35 @@
+# Secrets & configuration locale
+.env
+.env.local
+*.local
+
+# Clés / credentials
+**/credentials.json
+**/*.key
+
+# Illustrations générées (volumineux, régénérables)
+webapp/assets/illustrations/generated/
+data/
+
+# Base de données BirdNET-Pi (locale au Pi)
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Node (si outillage front ajouté plus tard)
+node_modules/
+dist/
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
