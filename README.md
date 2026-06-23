@@ -33,6 +33,9 @@ Changes include:
 
 !! note: see 'Migrating' on how to migrate from mcguirepr89
 
+### Little Visitors overlay
+This fork also ships the [Little Visitors](little-visitors/README.md) project overlay (docs, PHP/JS dashboard and scripts) under the [`little-visitors/`](little-visitors/) directory, kept separate from the BirdNET-Pi core so syncing the fork stays clean. See [`little-visitors/README.md`](little-visitors/README.md) for details.
+
 ## Introduction
 BirdNET-Pi is built on the [BirdNET framework](https://github.com/kahst/BirdNET-Analyzer) by [**@kahst**](https://github.com/kahst) <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg"></a> using [pre-built TFLite binaries](https://github.com/PINTO0309/TensorflowLite-bin) by [**@PINTO0309**](https://github.com/PINTO0309) . It is able to recognize bird sounds from a USB microphone or sound card in realtime and share its data with the rest of the world.
 
