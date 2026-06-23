@@ -5,8 +5,7 @@ chants d'oiseaux, une IA les identifie, et un dashboard web affiche en temps ré
 collection des « petits visiteurs » détectés — chacun illustré par un LLM.
 
 Projet personnel fortement inspiré de
-[AvianVisitors](https://github.com/Twarner491/AvianVisitors) de Theodore Warner, et
-du dashboard [bird.onethreenine.net](https://bird.onethreenine.net/).
+[AvianVisitors](https://github.com/Twarner491/AvianVisitors) de Theodore Warner
 
 ---
 
