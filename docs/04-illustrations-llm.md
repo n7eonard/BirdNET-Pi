@@ -18,10 +18,11 @@ Dans `.env` :
 
 ```dotenv
 GEMINI_API_KEY=xxxxxxxxxxxx
-ILLUSTRATION_STYLE=minimal flat vector illustration, soft pastel colors
 ```
 
 > 🔑 La clé du LLM est un secret → `.env` uniquement, jamais committée.
+> Le style n'est plus défini par une variable d'env : il est figé dans le prompt
+> maître (`ILLUSTRATION_PROMPT_TEMPLATE`) pour garantir une collection cohérente.
 
 ## Génération
 
@@ -33,20 +34,46 @@ python scripts/generate_illustrations.py "European Robin"   # une espèce préci
 Le script (`scripts/generate_illustrations.py`) est un **squelette** :
 - il lit la config depuis `.env` ;
 - il évite de régénérer une illustration déjà présente (idempotent) ;
+- il construit le prompt via `build_prompt(common, scientific, pose, anti_ref_line)` ;
 - le point d'appel au fournisseur est isolé dans une fonction `generate_image()` à brancher
   sur l'API choisie.
 
-## Conseils de prompt
+## Style des illustrations : kachō-e (estampe japonaise)
 
-- Garder un **style identique** pour toutes les espèces → collection visuellement cohérente.
-- Inclure le **nom scientifique** en plus du nom commun pour de meilleurs résultats.
-- Demander un **fond transparent ou uni** pour un rendu propre en grille.
-- Exemple de gabarit de prompt :
+Le style visé est celui d'une **estampe sur bois japonaise d'époque Edo** (kachō-e) :
+linework à l'encre sumi-e, aplats de couleur, palette terreuse (umber, ocre, indigo,
+vermillon, verts assourdis), oiseau **détouré sur fond crème** uniforme, **sans décor**
+(pas de branche, feuille, eau, lune…), fond **transparent** en sortie.
 
-  ```
-  {ILLUSTRATION_STYLE}, a {common_name} ({scientific_name}),
-  centered, plain background, no text
-  ```
+Le prompt complet vit dans `ILLUSTRATION_PROMPT_TEMPLATE` (dans le script). Ses variables :
+
+| Variable | Rôle |
+|----------|------|
+| `{pose}` | `perched` (perché) ou `in flight` (en vol) |
+| `{com_name}` | nom commun de l'espèce |
+| `{sci_name}` | nom scientifique |
+| `{anti_ref_line}` | ligne optionnelle de **référence négative** pour distinguer une espèce proche |
+
+### Les TROIS images de référence
+
+Le prompt s'appuie sur trois images à transmettre au modèle **en plus du texte** :
+
+| Image | Rôle | Contenu |
+|-------|------|---------|
+| **IMAGE 1** | Anatomie & couleurs | Photo de l'espèce (type guide ornitho) — proportions, motifs, couleurs |
+| **IMAGE 2** | Technique de peinture | Exemple « très peu de marques » : 2-4 aplats, ~30 coups de pinceau |
+| **IMAGE 3** | Style | Un vrai kachō-e d'époque Edo (autre espèce — on n'emprunte que le style) |
+
+> IMAGE 1 sert **uniquement** pour l'anatomie/couleurs, IMAGE 3 **uniquement** pour le
+> style. Aucun élément de décor d'IMAGE 3 ne doit être copié.
+
+## Conseils
+
+- Le style est **figé** dans le prompt → collection visuellement cohérente d'office.
+- Toujours fournir le **nom scientifique** (désambiguïse les espèces proches).
+- Pour deux espèces proches (chardonnerets, geais…), renseigner `anti_ref_line` pour
+  forcer le rendu des **différences diagnostiques**.
+- Sortie en **fond transparent** (`{slug}.png`) → rendu propre dans la grille du dashboard.
 
 ## Alternatives de fournisseur
 
